@@ -82,6 +82,11 @@ const displayMovements = function (movements, sort = false) {
   });
 };
 
+const calcDisplayBalance = function (acc) {
+  acc.balance = acc.movements.reduce((acc, mov) => acc + mov, 0);
+  labelBalance.textContent = `${acc.balance}€`;
+};
+
 const calcDisplaySummary = function (acc) {
   const incomes = acc.movements
     .filter(mov => mov > 0)
@@ -96,15 +101,12 @@ const calcDisplaySummary = function (acc) {
   const interest = acc.movements
     .filter(mov => mov > 0)
     .map(deposit => (deposit * acc.interestRate) / 100)
-    .filter(int => int >= 1)
+    .filter((int, i, arr) => {
+      // console.log(arr);
+      return int >= 1;
+    })
     .reduce((acc, int) => acc + int, 0);
   labelSumInterest.textContent = `${interest}€`;
-};
-
-const calcDisplayBalance = function (acc) {
-  const balance = acc.movements.reduce((acc, mov) => acc + mov, 0);
-  acc.balance = balance;
-  labelBalance.textContent = `${balance}€`;
 };
 
 const createUsernames = function (accs) {
@@ -119,41 +121,51 @@ const createUsernames = function (accs) {
 createUsernames(accounts);
 
 const updateUI = function (acc) {
+  // Display movements
   displayMovements(acc.movements);
+
+  // Display balance
   calcDisplayBalance(acc);
+
+  // Display summary
   calcDisplaySummary(acc);
 };
 
+///////////////////////////////////////
 // Event handlers
 let currentAccount;
 
 btnLogin.addEventListener('click', function (e) {
+  // Prevent form from submitting
   e.preventDefault();
 
-  const currentAccount = accounts.find(
+  currentAccount = accounts.find(
     acc => acc.username === inputLoginUsername.value
   );
+  console.log(currentAccount);
+
   if (currentAccount?.pin === Number(inputLoginPin.value)) {
+    // Display UI and message
     labelWelcome.textContent = `Welcome back, ${
       currentAccount.owner.split(' ')[0]
     }`;
     containerApp.style.opacity = 100;
 
+    // Clear input fields
     inputLoginUsername.value = inputLoginPin.value = '';
     inputLoginPin.blur();
 
+    // Update UI
     updateUI(currentAccount);
   }
 });
 
 btnTransfer.addEventListener('click', function (e) {
   e.preventDefault();
-
   const amount = Number(inputTransferAmount.value);
   const receiverAcc = accounts.find(
     acc => acc.username === inputTransferTo.value
   );
-
   inputTransferAmount.value = inputTransferTo.value = '';
 
   if (
@@ -162,9 +174,11 @@ btnTransfer.addEventListener('click', function (e) {
     currentAccount.balance >= amount &&
     receiverAcc?.username !== currentAccount.username
   ) {
+    // Doing the transfer
     currentAccount.movements.push(-amount);
     receiverAcc.movements.push(amount);
 
+    // Update UI
     updateUI(currentAccount);
   }
 });
@@ -174,12 +188,11 @@ btnLoan.addEventListener('click', function (e) {
 
   const amount = Number(inputLoanAmount.value);
 
-  if (
-    amount > 0 &&
-    currentAccount.movements.some(mov => mov >= amount * 0.1)
-  ) {
+  if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
+    // Add movement
     currentAccount.movements.push(amount);
 
+    // Update UI
     updateUI(currentAccount);
   }
   inputLoanAmount.value = '';
@@ -195,10 +208,16 @@ btnClose.addEventListener('click', function (e) {
     const index = accounts.findIndex(
       acc => acc.username === currentAccount.username
     );
+    console.log(index);
+    // .indexOf(23)
+
+    // Delete account
     accounts.splice(index, 1);
 
+    // Hide UI
     containerApp.style.opacity = 0;
   }
+
   inputCloseUsername.value = inputClosePin.value = '';
 });
 
@@ -374,4 +393,27 @@ const overallBalance2 = accounts
   // return > 0, B, A (switch order)
   movements.sort((a, b) => a - b); // Ascending
   movements.sort((a, b) => b - a); // Descending
+  const x = new Array(7);
+  
+  x.fill(1, 3, 5);
+  console.log(x);
+  
+  ar.fill(23, 2, 6);
+  console.log(ar);
+  
+  const y = Array.from({ length: 7 }, () => 1);
+  console.log(y);
+  
+  const z = Array.from({ length: 7 }, (_, i) => i + 1);
+  
+  const movementsUI = Array.from(document.querySelectorAll('.movements__value'));
+  console.log(movementsUI);
+  
+  labelBalance.addEventListener('click', function () {
+    const movementsUI = Array.from(
+      document.querySelectorAll('.movements__value'),
+      el => Number(el.textContent.replace('€', ''))
+    );
+    console.log(movementsUI);
+  });
 */

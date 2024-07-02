@@ -233,8 +233,6 @@ document.querySelector('.nav').addEventListener('click', function (e) {
   console.log('NAV', e.target, e.currentTarget);
 });
 
-*/
-
 const h1 = document.querySelector('h1');
 
 // Going downwards: child
@@ -263,3 +261,5 @@ console.log(h1.parentElement.children);
 [...h1.parentElement.children].forEach(function (el) {
   if (el !== h1) el.style.transform = 'scale(0.5)';
 });
+
+*/

@@ -411,7 +411,8 @@ class Account {
   }
 
   deposit(val) {
-    this._movements.push(val);
+    this.#movements.push(val);
+    return this;
   }
 
   withdraw(val) {
@@ -441,3 +442,7 @@ acc1.withdraw(140);
 acc1.requestLoan(1000);
 
 console.log(acc1);
+
+// Chaining
+acc1.deposit(300).deposit(500).withdraw(35).requestLoan(2500).withdraw(4000);
+console.log(acc1.getMovements());

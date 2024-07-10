@@ -3,7 +3,6 @@
 const btn = document.querySelector('.btn-country');
 const countriesContainer = document.querySelector('.countries');
 
-/*
 ///////////////////////////////////////
 // Old way of making AJAX calls
 const renderCountry = function (data, className = '') {
@@ -29,6 +28,7 @@ const renderCountry = function (data, className = '') {
   countriesContainer.style.opacity = 1;
 };
 
+/*
 const getCountryAndNeighbor = function (country) {
   const request = new XMLHttpRequest();
   request.open('GET', `https://restcountries.com/v3.1/name/${country}`);
@@ -82,3 +82,11 @@ setTimeout(() => {
 
 const request = fetch('https://restcountries.com/v3.1/name/korea');
 console.log(request);
+
+const getCountryDate = function (country) {
+  fetch(`https://restcountries.com/v3.1/name/${country}`)
+    .then(response => response.json())
+    .then(data => renderCountry(data[0]));
+};
+
+getCountryDate('korea');

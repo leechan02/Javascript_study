@@ -155,3 +155,20 @@ const getCountryDate = function (country) {
 btn.addEventListener('click', function () {
   getCountryDate('usa');
 });
+
+// const whereAmI = function (lat, lng) {
+//   fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`)
+//     .then(response => {
+//       if (!response.ok)
+//         throw new Error(`Problem with geocoding (${response.status})`);
+
+//       return response.json();
+//     })
+//     .then(data => {
+//       console.log(`You are in ${data.city}, ${data.country}`);
+//       getCountryDate(data.country);
+//     })
+//     .catch(err => console.error(`${err.message}`));
+// }
+
+// whereAmI(52.508, 13.381);

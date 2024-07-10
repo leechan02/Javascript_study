@@ -80,6 +80,38 @@ setTimeout(() => {
 ///////////////////////////////////////
 // Modern way of making AJAX calls
 
+// const getCountryDate = function (country) {
+//   fetch(`https://restcountries.com/v3.1/name/${country}`)
+//     .then(response => {
+//       if (!response.ok)
+//         throw new Error(`Country not found (${response.status})`);
+
+//       return response.json();
+//     })
+//     .then(data => {
+//       renderCountry(data[0]);
+//       const neighbour = data[0].borders[0];
+
+//       if (!neighbour) return;
+
+//       return fetch(`https://restcountries.com/v3.1/alpha/${neighbour}`);
+//     })
+//     .then(response => {
+
+//       if (!response.ok) throw new Error(`Neighbour not found (${response.status})`);
+
+//       return response.json();
+//     })
+//     .then(data => renderCountry(data[0], 'neighbour'))
+//     .catch(err => {
+//       console.error(`${err} 💥`);
+//       renderError(`Something went wrong 💥 ${err.message}. Try again!`);
+//     })
+//     .finally(() => {
+//       countriesContainer.style.opacity = 1;
+//     });
+// };
+
 const request = fetch('https://restcountries.com/v3.1/name/korea');
 console.log(request);
 
@@ -119,38 +151,6 @@ const getCountryDate = function (country) {
       countriesContainer.style.opacity = 1;
     });
 };
-
-// const getCountryDate = function (country) {
-//   fetch(`https://restcountries.com/v3.1/name/${country}`)
-//     .then(response => {
-//       if (!response.ok)
-//         throw new Error(`Country not found (${response.status})`);
-
-//       return response.json();
-//     })
-//     .then(data => {
-//       renderCountry(data[0]);
-//       const neighbour = data[0].borders[0];
-
-//       if (!neighbour) return;
-
-//       return fetch(`https://restcountries.com/v3.1/alpha/${neighbour}`);
-//     })
-//     .then(response => {
-
-//       if (!response.ok) throw new Error(`Neighbour not found (${response.status})`);
-
-//       return response.json();
-//     })
-//     .then(data => renderCountry(data[0], 'neighbour'))
-//     .catch(err => {
-//       console.error(`${err} 💥`);
-//       renderError(`Something went wrong 💥 ${err.message}. Try again!`);
-//     })
-//     .finally(() => {
-//       countriesContainer.style.opacity = 1;
-//     });
-// };
 
 btn.addEventListener('click', function () {
   getCountryDate('usa');

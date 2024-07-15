@@ -141,5 +141,4 @@ import 'core-js/stable';
 // import 'core-js/stable/array/find';
 // import 'core-js/stable/promise';
 
-// Polifilling async functions
 import 'regenerator-runtime/runtime';

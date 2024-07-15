@@ -65,9 +65,9 @@
 // console.log(ShoppingCart2);
 // console.log(ShoppingCart2.shippingCost);
 
-export.addTocart = function(product, quantity) {
-  console.log(`${quantity} ${product} added to cart (shipping cost is ${shippingCost})`);
-  cart.push({ product, quantity });
-};
+// export.addToCart = function(product, quantity) {
+//   console.log(`${quantity} ${product} added to cart (shipping cost is ${shippingCost})`);
+//   cart.push({ product, quantity });
+// };
 
-const { addTocart } = require('./shoppingCart.js');
+// const { addToCart } = require('./shoppingCart.js');

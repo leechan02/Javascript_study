@@ -37,30 +37,37 @@
 // const lastPost2 = await getLastPost();
 // console.log(lastPost2);
 
-const ShoppingCart2 = (function() {
-  const cart = [];
-  const shippingCost = 10;
-  const totalPrice = 237;
-  const totalQuantity = 23;
+// const ShoppingCart2 = (function() {
+//   const cart = [];
+//   const shippingCost = 10;
+//   const totalPrice = 237;
+//   const totalQuantity = 23;
 
-  const addToCart = function(product, quantity) {
-    console.log(`${quantity} ${product} added to cart (shipping cost is ${shippingCost})`);
-    cart.push({ product, quantity });
-  };
+//   const addToCart = function(product, quantity) {
+//     console.log(`${quantity} ${product} added to cart (shipping cost is ${shippingCost})`);
+//     cart.push({ product, quantity });
+//   };
 
-  const orderStock = function(product, quantity) {
-    console.log(`${quantity} ${product} ordered from supplier`);
-  };
+//   const orderStock = function(product, quantity) {
+//     console.log(`${quantity} ${product} ordered from supplier`);
+//   };
 
-  return {
-    addToCart,
-    cart,
-    totalPrice,
-    totalQuantity
-  }
-})();
+//   return {
+//     addToCart,
+//     cart,
+//     totalPrice,
+//     totalQuantity
+//   }
+// })();
 
-ShoppingCart2.addToCart('apple', 4);
-ShoppingCart2.addToCart('bread', 5);
-console.log(ShoppingCart2);
-console.log(ShoppingCart2.shippingCost);
+// ShoppingCart2.addToCart('apple', 4);
+// ShoppingCart2.addToCart('bread', 5);
+// console.log(ShoppingCart2);
+// console.log(ShoppingCart2.shippingCost);
+
+export.addTocart = function(product, quantity) {
+  console.log(`${quantity} ${product} added to cart (shipping cost is ${shippingCost})`);
+  cart.push({ product, quantity });
+};
+
+const { addTocart } = require('./shoppingCart.js');

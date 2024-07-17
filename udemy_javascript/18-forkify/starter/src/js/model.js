@@ -15,7 +15,7 @@ export const loadRecipe = async function (id) {
     const data = await getJSON(`${API_URL}${id}`);
 
     const { recipe } = data.data;
-    recipe = {
+    state.recipe = {
       id: recipe.id,
       title: recipe.title,
       publisher: recipe.publisher,
